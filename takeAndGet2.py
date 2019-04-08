@@ -64,6 +64,21 @@ print ('Click!')
 
 # WAIT FOR LAST IMAGE TO CHANGE
 
+# IF YOU ARE USING PYTHON V.2
+"""
+for x in range(1, 30):
+    sys.stdout.write('.')
+    sys.stdout.flush()
+    data = {"name": "camera.listImages", "parameters": { "entryCount": 1} }
+    resp = requests.post(BASEURL + 'commands/execute', json=data)
+    name = (resp.json()["results"]["entries"][0]["name"])
+    if (name!=oldname): 
+        break
+    time.sleep(0.5)
+
+print ('')
+"""
+
 for x in xrange(1, 30):
     sys.stdout.write('.')
     sys.stdout.flush()
@@ -95,6 +110,16 @@ if resp.status_code != 200:
 
 
 # SAVE NEW IMAGE
+# IF YOU ARE USING PYTHON V.2
+"""
+resp.raw.decode_content = True
+
+with open(name,'wb') as ofh:
+	for chunk in resp:
+            ofh.write(chunk)
+        
+print ('Image stored as: {}'.format(name))
+"""
 
 resp.raw.decode_content = True
 
